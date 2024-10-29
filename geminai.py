@@ -1,4 +1,12 @@
 import google.generativeai as genai
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+api_key = os.getenv("API_KEY")
+#TODO : REMOVER API KEY  
+#genai.configure(api_key="AIzaSyAoQsPcH8Yc0YWnl4bPTie3IjN_G96SLq4")
+genai.configure(api_key=api_key)
  
 # work
 # genai.configure(api_key="AIzaSyAoQsPcH8Yc0YWnl4bPTie3IjN_G96SLq4")
@@ -25,7 +33,7 @@ import google.generativeai as genai
 #- 2 etapa integrar com html
 
 #new test
-genai.configure(api_key="AIzaSyAoQsPcH8Yc0YWnl4bPTie3IjN_G96SLq4")
+
 
 
 model = genai.GenerativeModel("gemini-1.5-flash")
