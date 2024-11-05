@@ -27,8 +27,9 @@ def create_prompt():
 def prompt_user_language_input():
     while True:
         try:
-            input_language_code_user = 1
-            # input_language_code_user = int(input("Digite o número correspondente à linguagem de programação desejada:\n1. Python\n2. Java\n3. JavaScript\n4. C#\n"))
+            # TODO(MUDAR PARA O INPUT)
+            # input_language_code_user = 1
+            input_language_code_user = int(input("Digite o número correspondente à linguagem de programação desejada:\n1. Python\n2. Java\n3. JavaScript\n4. C#\n"))
             language_select = select_language_user(input_language_code_user)
             
             if language_select == 'Invalid selection':
@@ -39,8 +40,9 @@ def prompt_user_language_input():
             print("Por favor, insira um número válido.")
 
 def prompt_user_code_input():
-    input_code_user = 'def add(a, b): \n return a + b'
-    #input_code_user = input("Digite o código que você deseja documentar: \n")
+     # TODO(MUDAR PARA O INPUT)
+    # input_code_user = 'def add(a, b): \n return a + b'
+    input_code_user = input("Digite o código que você deseja documentar: \n")
     return input_code_user
 
 

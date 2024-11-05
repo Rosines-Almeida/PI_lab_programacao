@@ -26,7 +26,7 @@ pip install -r [requirements.txt]
 ## Configuração da API Key do Google Generative AI
 
 ### 1. Obter a API Key
-- Acesse o [Google Cloud Console](https://console.cloud.google.com/).
+- Acesse o [Google Cloud Console](https://aistudio.google.com/app/apikey).
 - Crie um novo projeto ou selecione um projeto existente.
 - Ative a API do Google Generative AI.
 - Navegue até a seção de credenciais e crie uma nova chave de API.
@@ -64,3 +64,12 @@ Digite o código que você deseja documentar:
 def add(a, b):
     return a + b
 ```
+### Exemplo do retorno 
+
+```json
+{
+  "codigo": "public class Main {\n  public static int add(int a, int b) {\n  return a + b;\n  }\n  public static void main(String[] args) {\n  int sum = add(5, 3);\n  System.out.println(\"A soma de 5 e 3 é: \" + sum);\n  }\n}",
+  "descricao": "Esta função recebe dois inteiros como entrada e retorna a sua soma.",
+  "explicacao": "A função `add(int a, int b)` recebe dois parâmetros inteiros, `a` e `b`. Ela então retorna a soma desses dois números usando o operador `+`. No exemplo do método `main`, a função `add` é chamada com os argumentos 5 e 3. A função retorna o valor 8, que é armazenado na variável `sum`. Em seguida, a variável `sum` é impressa no console.",
+  "exemplo": "A função `add` pode ser usada para somar quaisquer dois números inteiros. Por exemplo, para adicionar 10 e 20, você chamaria a função da seguinte forma: `add(10, 20)`. Isso retornaria o valor 30." 
+}
