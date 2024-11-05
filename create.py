@@ -1,20 +1,3 @@
-
- 
-# ver documentação
-# ver se tem outro video 
-#ja criar seus comando nesse arquivo  
-
-# o que fazer com o codigo acima
- 
- 
-# - dar exemplo de como eu quero o retono do codigo
-#- fazer um kanban para organizar as tarefas (metodologia no trabalho - tirar print )
-
-#- criar um readme.md
-#- 2 etapa integrar com html
-
-#new test
-
 import google.generativeai as genai
 from dotenv import load_dotenv
 import os
@@ -23,6 +6,11 @@ def configure_api_key():
     load_dotenv()
     api_key = os.getenv("API_KEY")
     genai.configure(api_key=api_key)
+
+def create_documentation(language, codigo, prompt):
+    model = genai.GenerativeModel("gemini-1.5-flash")
+    response = model.generate_content(f"\n\n {codigo} em {language}, {prompt} \n\n")
+    return response.text
 
 def select_language_user(resposta_input_language):
     languages = {
@@ -33,14 +21,8 @@ def select_language_user(resposta_input_language):
     }
     return languages.get(resposta_input_language, 'Invalid selection')
 
-def create_documentation(language, codigo, prompt):
-    model = genai.GenerativeModel("gemini-1.5-flash")
-    response = model.generate_content(f"\n\n {codigo} em {language}, {prompt} \n\n {codigo}")
-    # response = model.generate_content(f"Quero um retorne soment Json  sobre este códigoo em {language}, quero que retorne em JSON com key codigo, descricao, explicacao e  exemplo: \n\n {codigo}")
-    return response.text
-
 def create_prompt():
-    return "Quero que você retorne somente JSON sobre o código, as keys serão codigo', 'descricao', 'explicacao' e'exemplo'. Em codigo': Deve conter o código fornecido descricao  Uma breve descrição do que o código faz. explicacao: Uma explicação detalhada do código. exemplo': Um exemplo prático de como o código pode ser utilizado, incluindo exemplos de uso e o retorno esperado."
+    return "Quero que você retorne somente JSON sobre o código, as keys serão 'codigo', 'descricao', 'explicacao' e'exemplo'. Em codigo: Deve conter o código fornecido descricao  Uma breve descrição do que o código faz. explicacao: Uma explicação detalhada do código. exemplo: Um exemplo prático de como o código pode ser utilizado, incluindo exemplos de uso e o retorno esperado."
 
 def prompt_user_language_input():
     while True:
