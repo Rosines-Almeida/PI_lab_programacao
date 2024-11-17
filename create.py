@@ -61,25 +61,18 @@ def prompt_user_code_input():
     input_code_user = 'soma_lista(numeros): total = 0 \n for num in numeros: \ntotal = add\n(total, num) \nreturn total'
     return input_code_user
 
-def convert_to_valid_json(response_text):
-    print(response_text)
-    try:
-        # Verifica se a resposta é um JSON válido
-        response_json = json.loads(response_text)
-        return json.dumps(response_json, indent=4)  # Retorna o JSON formatado
-    except json.JSONDecodeError:
-        print("Erro ao decodificar o JSON da resposta da API")
-        return None
-
 def format_json_string(json_string):
     # Remove as marcações de código
     formatted_string = json_string.replace("```json", "").replace("```", "").strip()
     return formatted_string
 
 def generate_pdf(documentation):
-    # print(documentation)
-    # documentation = "{chave:'value'}"
-    pdf_path = "documentation.pdf"
+    # configurar onde o arquivo gerado será salvo e nome do arquivo
+    pdf_dir = os.path.join(os.path.dirname(__file__), 'pdf')
+    os.makedirs(pdf_dir, exist_ok=True)
+    pdf_path = os.path.join(pdf_dir, 'documentation.pdf')
+
+
     doc = SimpleDocTemplate(pdf_path, pagesize=letter)
     styles = getSampleStyleSheet()
     elements = []
@@ -91,7 +84,7 @@ def generate_pdf(documentation):
 
     # Adiciona o conteúdo da documentação
     try:
-        documentation_dict = json.loads(documentation)  # Converte a string JSON para um dicionário
+        documentation_dict = json.loads(documentation)  # Converte a string JSON para umdicionário
     except json.JSONDecodeError:
         print("Erro ao decodificar o JSON")
         return None
@@ -114,10 +107,11 @@ def main():
     user_code = prompt_user_code_input()
     documentation = create_documentation(user_language_select, user_code, prompt)
     docJSON = format_json_string(documentation)
-    print(docJSON)
     pdf_path = generate_pdf(docJSON)
     if pdf_path:
         print(f"PDF gerado em: {pdf_path}")
+    else:
+        print(docJSON)
 
 if __name__ == "__main__":
     main()
