@@ -57,34 +57,28 @@ def prompt_user_language_input():
             print("Por favor, insira um número válido.")
             
 def prompt_user_code_input():
-    # input_code_user = input("Digite o código que você deseja documentar: \n")
-    input_code_user = 'soma_lista(numeros): total = 0 \n for num in numeros: \ntotal = add\n(total, num) \nreturn total'
+    input_code_user = input("Digite o código que você deseja documentar: \n")
     return input_code_user
 
 def format_json_string(json_string):
-    # Remove as marcações de código
     formatted_string = json_string.replace("```json", "").replace("```", "").strip()
     return formatted_string
 
 def generate_pdf(documentation):
-    # configurar onde o arquivo gerado será salvo e nome do arquivo
     pdf_dir = os.path.join(os.path.dirname(__file__), 'pdf')
     os.makedirs(pdf_dir, exist_ok=True)
-    pdf_path = os.path.join(pdf_dir, 'documentation.pdf')
-
+    pdf_path = os.path.join(pdf_dir, 'documentation_code.pdf')
 
     doc = SimpleDocTemplate(pdf_path, pagesize=letter)
     styles = getSampleStyleSheet()
     elements = []
 
-    # Título
     title = Paragraph("Documentação do Código", styles['Title'])
     elements.append(title)
     elements.append(Spacer(1, 12))
 
-    # Adiciona o conteúdo da documentação
     try:
-        documentation_dict = json.loads(documentation)  # Converte a string JSON para umdicionário
+        documentation_dict = json.loads(documentation)  
     except json.JSONDecodeError:
         print("Erro ao decodificar o JSON")
         return None
@@ -106,10 +100,11 @@ def main():
     user_language_select = prompt_user_language_input()
     user_code = prompt_user_code_input()
     documentation = create_documentation(user_language_select, user_code, prompt)
+    
     docJSON = format_json_string(documentation)
     pdf_path = generate_pdf(docJSON)
     if pdf_path:
-        print(f"PDF gerado em: {pdf_path}")
+        print(f"PDF gerado com sucesso, vizualize o arquivo em: {pdf_path}")
     else:
         print(docJSON)
 
