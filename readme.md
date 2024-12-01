@@ -61,8 +61,7 @@ Digite o número correspondente à linguagem de programação desejada:
 Exemplo de código para inserir
 ```bash
 Digite o código que você deseja documentar:
-def add(a, b):
-    return a + b
+def add(a, b):\ return a + b
 ```
 ### Exemplo do retorno 
 
